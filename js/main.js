@@ -1,7 +1,7 @@
 /*==================Coundown==================*/
 
 function makeTimer() {	
-	var endTime = new Date("01 March 2022 12:00:00 GMT+05:30");			
+	var endTime = new Date("01 May 2022 12:00:00 GMT+05:30");			
 		endTime = (Date.parse(endTime) / 1000);
 
 	var now = new Date();
