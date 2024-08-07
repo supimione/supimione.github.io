@@ -1,9 +1,11 @@
 "use client"; //ui manipulation or using any react hook we have to use
 
 import React, { useState } from "react";
-import { Menu, MenuItem } from "./ui/navbar-menu";
-import { cn } from "@/utils/cn";
 import Link from "next/link";
+
+//aceternity ui
+import { cn } from "@/utils/cn";
+import { Menu, MenuItem } from "./ui/navbar-menu";
 
 function Navbar({
   className,
@@ -22,32 +24,39 @@ function Navbar({
       )}
     >
       <Menu setActive={setActive}>
-        <Link href={"#"}>
+        <Link href={"/home"}>
           <MenuItem
             setActive={setActive}
             active={active}
             item="Home"
           ></MenuItem>
         </Link>
-        <Link href={"#"}>
+        <Link href={"/projects"}>
           <MenuItem
             setActive={setActive}
             active={active}
             item="Projects"
           ></MenuItem>
         </Link>
-        <Link href={"#"}>
+        <Link href={"/uses"}>
           <MenuItem
             setActive={setActive}
             active={active}
             item="Uses"
           ></MenuItem>
         </Link>
-        <Link href={"#"}>
+        <Link href={"/about"}>
           <MenuItem
             setActive={setActive}
             active={active}
             item="About"
+          ></MenuItem>
+        </Link>
+        <Link href={"/contact"}>
+          <MenuItem
+            setActive={setActive}
+            active={active}
+            item="Contact"
           ></MenuItem>
         </Link>
       </Menu>

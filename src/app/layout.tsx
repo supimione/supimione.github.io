@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+
+//components
 import Navbar from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Supratim Das - Software Developer",
@@ -15,8 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={darkMode ? "dark" : "light"}>
       <body>
-        <Navbar darkMode={darkMode} />
-        {children}
+        <div className="flex min-h-screen flex-col items-center justify-between bg-lightBgColor dark:bg-black">
+          <div className="min-h-screen bg-white dark:bg-darkBgColor w-full mx-auto sm:w-10/12 md:w-10/12 lg:w-10/12 xl:w-10/12">
+            <Navbar darkMode={darkMode} />
+            {children}
+            <Footer darkMode={darkMode} />
+          </div>
+        </div>
       </body>
     </html>
   );
