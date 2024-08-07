@@ -14,6 +14,23 @@ const transition = {
   restSpeed: 0.001,
 };
 
+export const Menu = ({
+  setActive,
+  children,
+}: {
+  setActive: (item: string | null) => void;
+  children: React.ReactNode;
+}) => {
+  return (
+    <nav
+      onMouseLeave={() => setActive(null)} // resets the state
+      className="relative rounded-full bg-white/90 text-sm text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 flex justify-center space-x-4 px-3 py-3"
+    >
+      {children}
+    </nav>
+  );
+};
+
 export const MenuItem = ({
   setActive,
   active,
@@ -58,23 +75,6 @@ export const MenuItem = ({
         </motion.div>
       )}
     </div>
-  );
-};
-
-export const Menu = ({
-  setActive,
-  children,
-}: {
-  setActive: (item: string | null) => void;
-  children: React.ReactNode;
-}) => {
-  return (
-    <nav
-      onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-2 py-2"
-    >
-      {children}
-    </nav>
   );
 };
 
