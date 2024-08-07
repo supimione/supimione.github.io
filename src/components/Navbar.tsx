@@ -1,78 +1,62 @@
 "use client"; //ui manipulation or using any react hook we have to use
 
 import React, { useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
-import { cn } from "@/utils/cn";
 import Link from "next/link";
 
-function Navbar({ className }: { className?: string }) {
+//aceternity ui
+import { cn } from "@/utils/cn";
+import { Menu, MenuItem } from "./ui/navbar-menu";
+
+function Navbar({
+  className,
+  darkMode,
+}: {
+  className?: string;
+  darkMode: boolean;
+}) {
   const [active, setActive] = useState<string | null>(null);
   return (
     <div
-      className={cn("fixed top-6 inset-x-0 max-w-md mx-auto z-50", className)}
+      className={cn(
+        "fixed top-6 inset-x-0 max-w-md mx-auto z-50",
+        className,
+        darkMode ? "dark" : "light"
+      )}
     >
       <Menu setActive={setActive}>
-        <Link href={"#"}>
+        <Link href={"/home"}>
           <MenuItem
             setActive={setActive}
             active={active}
             item="Home"
           ></MenuItem>
         </Link>
-        <Link href={"#"}>
-          <MenuItem setActive={setActive} active={active} item="Services">
-            <div className="flex flex-col space-y-4 text-sm">
-              <HoveredLink href="/web-dev">Web Development</HoveredLink>
-              <HoveredLink href="/interface-design">
-                Interface Design
-              </HoveredLink>
-              <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-              <HoveredLink href="/branding">Branding</HoveredLink>
-            </div>
-          </MenuItem>
-        </Link>
-        <Link href={"#"}>
-          <MenuItem setActive={setActive} active={active} item="Creating">
-            <div className="  text-sm grid grid-cols-2 gap-10 p-4">
-              <ProductItem
-                title=""
-                href="#"
-                src="/"
-                description="Prepare for tech interviews like never before."
-              />
-              <ProductItem
-                title=""
-                href="#"
-                src="/"
-                description="Prepare for tech interviews like never before."
-              />
-              <ProductItem
-                title=""
-                href="#"
-                src="/"
-                description="Prepare for tech interviews like never before."
-              />
-              <ProductItem
-                title=""
-                href="#"
-                src="/"
-                description="Prepare for tech interviews like never before."
-              />
-            </div>
-          </MenuItem>
-        </Link>
-        <Link href={"#"}>
+        <Link href={"/projects"}>
           <MenuItem
             setActive={setActive}
             active={active}
-            item="Resume"
+            item="Projects"
           ></MenuItem>
         </Link>
-        <Link href={"#"}>
+        <Link href={"/uses"}>
+          <MenuItem
+            setActive={setActive}
+            active={active}
+            item="Uses"
+          ></MenuItem>
+        </Link>
+        <Link href={"/about"}>
           <MenuItem
             setActive={setActive}
             active={active}
             item="About"
+          ></MenuItem>
+        </Link>
+        <Link href={"/contact"}>
+          <MenuItem
+            setActive={setActive}
+            active={active}
+            item="Contact"
           ></MenuItem>
         </Link>
       </Menu>
