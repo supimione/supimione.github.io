@@ -24,7 +24,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full bg-white/90 text-sm text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 flex justify-center space-x-4 px-3 py-3"
+      className="relative rounded-full bg-black/80 text-sm text-zinc-200 shadow-lg shadow-green-400/5 ring-1 ring-green-400/20 backdrop-blur flex justify-center space-x-4 px-3 py-3"
     >
       {children}
     </nav>
@@ -46,7 +46,7 @@ export const MenuItem = ({
     <div onMouseEnter={() => setActive(item)} className="relative ">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black hover:opacity-[0.9] text-sm dark:text-white px-2"
+        className="cursor-pointer text-zinc-300 hover:text-green-400 text-sm px-2 transition-colors"
       >
         {item}
       </motion.p>
