@@ -12,23 +12,32 @@ const socials = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-24 px-6 z-10">
+    <section id="contact" className="relative py-28 px-6 z-10">
       <div className="max-w-3xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-mono text-neon text-sm uppercase tracking-wider mb-6"
+          className="font-mono text-blue-400 text-sm uppercase tracking-wider mb-4"
         >
           {">"} Let&apos;s Connect
         </motion.h2>
+        <motion.h3
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-bold text-white mb-6"
+        >
+          Got an idea? <span className="text-gradient">Let&apos;s talk.</span>
+        </motion.h3>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-gray-400 text-lg mb-8 leading-relaxed"
+          className="text-gray-400 text-lg mb-10 leading-relaxed"
         >
           Whether it&apos;s building products, collaborating on ideas, or
           discussing tech &amp; AI — I&apos;m always open to meaningful
@@ -38,43 +47,43 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
         >
           <a
             href="mailto:supimione@gmail.com"
-            className="inline-flex items-center gap-2 text-gray-300 hover:text-neon transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass glass-hover text-gray-300 hover:text-blue-400 transition-all duration-300"
           >
-            <FiMail /> supimione@gmail.com
+            <FiMail size={16} /> supimione@gmail.com
           </a>
-          <span className="hidden sm:block text-gray-600">|</span>
           <a
             href="tel:+919933606242"
-            className="inline-flex items-center gap-2 text-gray-300 hover:text-neon transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass glass-hover text-gray-300 hover:text-blue-400 transition-all duration-300"
           >
-            <FiPhone /> +91 9933606242
+            <FiPhone size={16} /> +91 9933606242
           </a>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
           viewport={{ once: true }}
           className="flex gap-4 justify-center"
         >
           {socials.map((s) => (
-            <a
+            <motion.a
               key={s.label}
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="w-12 h-12 rounded-full border border-green-400/30 flex items-center justify-center text-green-400 hover:border-green-400 hover:shadow-neon-sm transition-all duration-300"
+              whileHover={{ scale: 1.1, y: -2 }}
+              className="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-500/30 hover:shadow-glow-sm transition-all duration-300"
             >
               <s.icon size={20} />
-            </a>
+            </motion.a>
           ))}
         </motion.div>
       </div>

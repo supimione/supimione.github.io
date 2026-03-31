@@ -7,9 +7,9 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative z-10 w-full px-6 md:px-20 py-8 border-t border-green-400/20">
+    <footer className="relative z-10 w-full px-6 md:px-20 py-8 border-t border-white/5">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-gray-600">
           &copy; 2026 Supratim Das. All Rights Reserved.
         </span>
         <ul className="flex gap-6">
@@ -17,7 +17,7 @@ export default function Footer() {
             <li key={l.label}>
               <a
                 href={l.href}
-                className="text-sm text-gray-500 hover:text-neon transition-colors"
+                className="text-sm text-gray-600 hover:text-blue-400 transition-colors duration-300"
               >
                 {l.label}
               </a>
