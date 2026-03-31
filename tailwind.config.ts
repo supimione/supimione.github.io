@@ -10,13 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        lightBgColor: "#fafafa",
-        darkBgColor: "#27272ae6",
+        neon: "#4ade80",
+        darkBg: "#0a0a0a",
+        darkSurface: "rgba(255,255,255,0.05)",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        mono: ["'Fira Code'", "'JetBrains Mono'", "monospace"],
+      },
+      boxShadow: {
+        neon: "0 0 20px rgba(74,222,128,0.5)",
+        "neon-sm": "0 0 10px rgba(74,222,128,0.3)",
+      },
+      animation: {
+        "bounce-slow": "bounce 2s infinite",
       },
     },
   },
