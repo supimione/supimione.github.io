@@ -7,8 +7,8 @@ import { Menu, MenuItem } from "./ui/navbar-menu";
 const navItems = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Dreamlytix", href: "#dreamlytix" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -18,7 +18,7 @@ export default function Navbar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "fixed top-6 inset-x-0 max-w-md mx-auto z-50",
+        "fixed top-6 inset-x-0 max-w-lg mx-auto z-50",
         className
       )}
     >
