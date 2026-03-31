@@ -33,21 +33,35 @@ export default function TechStack() {
   let globalIndex = 0;
 
   return (
-    <section id="tech" className="relative py-24 px-6 z-10">
+    <section id="tech" className="relative py-28 px-6 z-10">
       <div className="max-w-5xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-mono text-neon text-sm uppercase tracking-wider mb-12 text-center"
+          className="font-mono text-blue-400 text-sm uppercase tracking-wider mb-4 text-center"
         >
           {">"} Tech Stack
         </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-gray-500 text-center mb-12 max-w-lg mx-auto"
+        >
+          Technologies I work with daily to build scalable products
+        </motion.p>
 
         <div className="space-y-8">
           {categories.map((cat) => (
-            <div key={cat.name}>
-              <h3 className="font-mono text-neon text-xs uppercase tracking-widest mb-3">
+            <motion.div
+              key={cat.name}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="font-mono text-purple-400 text-xs uppercase tracking-widest mb-3">
                 {cat.name}
               </h3>
               <div className="flex flex-wrap gap-3">
@@ -56,18 +70,19 @@ export default function TechStack() {
                   return (
                     <motion.span
                       key={item}
-                      initial={{ opacity: 0, y: 15 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.05, duration: 0.4 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: idx * 0.04, duration: 0.3 }}
                       viewport={{ once: true }}
-                      className="px-4 py-1.5 rounded-full border border-green-400/30 bg-green-400/10 text-green-400 text-sm font-medium hover:border-green-400 hover:shadow-neon-sm transition-all duration-300 cursor-default"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-300 text-sm font-medium hover:border-blue-400/50 hover:bg-blue-500/10 hover:shadow-glow-sm transition-all duration-300 cursor-default"
                     >
                       {item}
                     </motion.span>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
