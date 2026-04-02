@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { cn } from "@/utils/cn";
 import { Menu, MenuItem } from "./ui/navbar-menu";
 
@@ -17,19 +17,12 @@ export default function Navbar({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn(
-        "fixed top-6 inset-x-0 max-w-lg mx-auto z-50",
-        className
-      )}
+      className={cn("fixed top-6 inset-x-0 max-w-lg mx-auto z-50", className)}
     >
       <Menu setActive={setActive}>
         {navItems.map((item) => (
           <a key={item.label} href={item.href}>
-            <MenuItem
-              setActive={setActive}
-              active={active}
-              item={item.label}
-            />
+            <MenuItem setActive={setActive} active={active} item={item.label} />
           </a>
         ))}
       </Menu>

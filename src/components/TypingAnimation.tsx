@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface TypingAnimationProps {
   text: string;
@@ -16,7 +16,8 @@ export default function TypingAnimation({
   onComplete,
 }: TypingAnimationProps) {
   const [displayed, setDisplayed] = useState("");
-  const [showCursor, setShowCursor] = useState(true);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
     let i = 0;
@@ -26,22 +27,16 @@ export default function TypingAnimation({
         i++;
       } else {
         clearInterval(interval);
-        onComplete?.();
+        onCompleteRef.current?.();
       }
     }, speed);
     return () => clearInterval(interval);
-  }, [text, speed, onComplete]);
-
-  // Blinking cursor
-  useEffect(() => {
-    const blink = setInterval(() => setShowCursor((v) => !v), 530);
-    return () => clearInterval(blink);
-  }, []);
+  }, [text, speed]);
 
   return (
     <span className={className}>
       {displayed}
-      <span className={showCursor ? "opacity-100" : "opacity-0"}>_</span>
+      <span className="animate-pulse">_</span>
     </span>
   );
 }

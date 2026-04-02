@@ -1,106 +1,140 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "@/hooks/useInView";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
   const [count, setCount] = useState(0);
+  const started = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
-    let start = 0;
-    const duration = 1500;
-    const step = Math.ceil(target / (duration / 16));
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(start);
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [isInView, target]);
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          observer.disconnect();
+          let start = 0;
+          const step = Math.ceil(target / (1500 / 16));
+          const timer = setInterval(() => {
+            start += step;
+            if (start >= target) {
+              setCount(target);
+              clearInterval(timer);
+            } else {
+              setCount(start);
+            }
+          }, 16);
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target]);
 
   return (
     <span ref={ref} className="text-gradient text-3xl font-extrabold">
-      {count}{suffix}
+      {count}
+      {suffix}
     </span>
   );
 }
 
 const highlights = [
   { value: 7, suffix: "+", label: "Years Experience" },
-  { value: 25, suffix: "+", label: "Projects Delivered" },
-  { value: 10, suffix: "+", label: "Tech Stack Tools" },
+  { value: 15, suffix: "+", label: "Projects Shipped" },
+  { value: 12, suffix: "+", label: "Technologies" },
 ];
 
 export default function About() {
+  const { ref, visible } = useInView();
+
   return (
-    <section id="about" className="relative py-28 px-6 z-10 dot-grid">
+    <section
+      id="about"
+      className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 z-10 dot-grid"
+      ref={ref}
+    >
       <div className="max-w-5xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-mono text-blue-400 text-sm uppercase tracking-wider mb-12 text-center"
+        <h2
+          className={`font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-8 sm:mb-12 text-center fade-up ${visible ? "visible" : ""}`}
         >
           {">"} About Me
-        </motion.h2>
+        </h2>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-16 items-center"
+        <div
+          className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center fade-up-lg ${visible ? "visible" : ""}`}
+          style={{ transitionDelay: "0.1s" }}
         >
           <div>
-            <p className="text-gray-300 text-lg leading-relaxed mb-4">
-              A passionate Software Engineer with 7+ years of experience
-              building scalable, high-performance web &amp; mobile applications.
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
+              I enjoy taking ideas from concept to <br />
+              reality, building products that actually <br /> work and deliver
+              value.
+            </h3>
+            <p className="text-gray-300 text-base sm:text-md leading-relaxed mb-4">
+              Full-Stack Software Engineer focused on building scalable,
+              high-performance web and mobile applications. Experienced in
+              crafting seamless user experiences alongside robust backend
+              architectures, ensuring reliability, efficiency, and
+              maintainability across the entire stack.
             </p>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              From frontend to backend to mobile — I handle the full picture.
-              Alongside engineering, I&apos;m building{" "}
-              <span className="text-blue-400">Dreamlytix</span> — transforming
-              schools into digital ecosystems. I actively use AI tools like
-              Claude, Codex, and Antigravity to enhance development through
-              faster coding, debugging, and prototyping.
+            <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+              AI is an integral part of my development workflow. I leverage
+              tools like <span className="text-blue-400">Claude Code</span>,{" "}
+              <span className="text-blue-400">Codex</span>, and{" "}
+              <span className="text-blue-400">Antigravity</span> to accelerate
+              development, improve debugging, and streamline prototyping. I’m
+              also actively exploring AI-powered user experiences and automation
+              to build smarter, future-ready applications.
             </p>
-            <div className="flex gap-8">
+
+            <div className="flex gap-6 sm:gap-8">
               {highlights.map((h, i) => (
-                <motion.div
+                <div
                   key={h.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="text-center"
+                  className={`text-center fade-up ${visible ? "visible" : ""}`}
+                  style={{ transitionDelay: `${0.2 + i * 0.1}s` }}
                 >
                   <CountUp target={h.value} suffix={h.suffix} />
-                  <p className="text-gray-500 text-xs mt-1 uppercase tracking-wider">{h.label}</p>
-                </motion.div>
+                  <p className="text-gray-500 text-xs mt-1 uppercase tracking-wider">
+                    {h.label}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
 
           <div className="flex flex-col gap-4">
             {[
-              { icon: "🚀", title: "Founder @ Dreamlytix", desc: "Transforming schools into digital ecosystems" },
-              { icon: "🤖", title: "AI-Powered Workflow", desc: "Claude, Codex & AI tools in daily development" },
-              { icon: "💡", title: "Full-Stack Builder", desc: "Frontend, backend, mobile — end to end" },
+              {
+                icon: "🏫",
+                title: "Founder @ Dreamlytix",
+                desc: "Building smart, scalable digital solutions for businesses — transforming with technology",
+              },
+              {
+                icon: "🤖",
+                title: "AI-Powered Development",
+                desc: "Claude Code, Codex & AI tools integrated into every stage — from ideation to deployment",
+              },
+              {
+                icon: "🔭",
+                title: "Currently Exploring",
+                desc: "AI-powered automation, cross-platform apps with React Native & AI-driven user experiences",
+              },
+              {
+                icon: "🌱",
+                title: "Mindset",
+                desc: "Continuous learning, building meaningful products & collaborating with people who value impact",
+              },
             ].map((card, i) => (
-              <motion.div
+              <div
                 key={card.title}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.15, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="glass glass-hover rounded-xl p-5 transition-all duration-300 group"
+                className={`glass glass-hover rounded-xl p-5 transition-all duration-300 group fade-right ${visible ? "visible" : ""}`}
+                style={{ transitionDelay: `${0.2 + i * 0.12}s` }}
               >
                 <div className="flex items-start gap-4">
                   <span className="text-2xl">{card.icon}</span>
@@ -109,10 +143,10 @@ export default function About() {
                     <p className="text-gray-500 text-sm mt-0.5">{card.desc}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+  compress: true,
+  reactStrictMode: true,
+  poweredByHeader: false,
+};
 
 export default nextConfig;

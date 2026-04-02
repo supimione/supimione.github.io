@@ -1,62 +1,130 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@custom-variant dark (&:is(.dark *));
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
+@theme {
+  --color-darkBg: #060611;
+  --color-darkSurface: rgba(255, 255, 255, 0.03);
+
+  --color-accent-blue: #3b82f6;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-cyan: #06b6d4;
+
+  --font-sans: var(--font-sans), 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
+
+  --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.4);
+  --shadow-glow-sm: 0 0 15px rgba(59, 130, 246, 0.25);
+  --shadow-glow-purple: 0 0 30px rgba(139, 92, 246, 0.4);
+  --shadow-glow-purple-sm: 0 0 15px rgba(139, 92, 246, 0.25);
+
+  --animate-bounce-slow: bounce 2s infinite;
+  --animate-gradient-x: gradient-x 6s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 6s ease-in-out 3s infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-border-rotate: border-rotate 4s linear infinite;
+
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
-  body {
-    @apply bg-darkBg text-white;
-    font-family: 'Inter', sans-serif;
-    position: relative;
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+  @keyframes border-rotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-x 6s ease infinite;
-  }
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-  .text-accent {
-    color: #3b82f6;
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
+}
 
-  .border-gradient {
-    border-image: linear-gradient(135deg, #3b82f6, #8b5cf6) 1;
-  }
+@utility text-gradient {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-x 6s ease infinite;
+}
 
-  .glass {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-  }
+@utility text-accent {
+  color: #3b82f6;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
 
-  .glass-hover:hover {
+@utility border-gradient {
+  border-image: linear-gradient(135deg, #3b82f6, #8b5cf6) 1;
+}
+
+@utility glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@utility glass-hover {
+  &:hover {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(59, 130, 246, 0.3);
     box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
   }
+}
 
-  .dot-grid {
-    background-image: radial-gradient(rgba(59, 130, 246, 0.07) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }
+@utility dot-grid {
+  background-image: radial-gradient(
+    rgba(59, 130, 246, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+}
 
-  .gradient-border {
-    position: relative;
-    border-radius: 1rem;
-  }
-  .gradient-border::before {
-    content: "";
+@utility gradient-border {
+  position: relative;
+  border-radius: 1rem;
+  &::before {
+    content: '';
     position: absolute;
     inset: -1px;
     border-radius: inherit;
@@ -64,19 +132,61 @@
     background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
     background-size: 200% 200%;
     animation: gradient-x 6s ease infinite;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
   }
+}
 
-  .btn-glow {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
+@utility fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .btn-glow::before {
-    content: "";
+}
+
+@utility fade-up-lg {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility fade-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  &.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@utility fade-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  &.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@utility btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  &::before {
+    content: '';
     position: absolute;
     inset: -2px;
     background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
@@ -86,12 +196,62 @@
     z-index: -1;
     filter: blur(12px);
   }
-  .btn-glow:hover::before {
+  &:hover::before {
     opacity: 1;
   }
 }
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Fluid base: 15px on 375px → 18px on 1440px */
+    font-size: clamp(0.9375rem, 0.85rem + 0.28vw, 1.125rem);
+  }
+  body {
+    @apply bg-darkBg text-white;
+    font-family: var(--font-sans);
+    position: relative;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
 @keyframes gradient-x {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

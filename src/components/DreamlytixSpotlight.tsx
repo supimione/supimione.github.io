@@ -1,51 +1,75 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 import { FiExternalLink } from "react-icons/fi";
 
+const features = [
+  "Secure & modern websites",
+  "Scalable admin panels & dashboards",
+  "User-friendly mobile applications",
+  "Performance-driven architecture",
+];
+
 export default function DreamlytixSpotlight() {
+  const { ref, visible } = useInView();
+
   return (
-    <section id="dreamlytix" className="relative py-28 px-6 z-10">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="relative rounded-2xl p-8 md:p-12 overflow-hidden gradient-border"
+    <section
+      id="dreamlytix"
+      className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 z-10"
+      ref={ref}
+    >
+      <div className="max-w-5xl mx-auto">
+        <div
+          className={`relative rounded-2xl p-6 sm:p-8 md:p-12 overflow-hidden gradient-border fade-up-lg ${visible ? "visible" : ""}`}
           style={{ background: "rgba(6, 6, 17, 0.8)" }}
         >
-          {/* Animated gradient background */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 pointer-events-none" />
+          <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 pointer-events-none" />
 
           <div className="relative z-10">
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="inline-block font-mono text-blue-400 text-xs uppercase tracking-widest mb-4"
+            <span
+              className={`inline-block font-mono text-blue-400 text-xs uppercase tracking-widest mb-4 fade-left ${visible ? "visible" : ""}`}
+              style={{ transitionDelay: "0.2s" }}
             >
               Currently Building
-            </motion.span>
-            <h3 className="text-4xl md:text-5xl font-extrabold text-gradient mb-5">
+            </span>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-extrabold text-gradient mb-3">
               Dreamlytix
             </h3>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-2xl">
+            <p className="text-white/80 text-base sm:text-lg font-medium mb-4">
+              Turning Ideas Into Digital Reality
+            </p>
+            <p className="text-gray-400 text-base leading-relaxed mb-6 max-w-4xl">
               Transforming traditional schools into digitally empowered
               ecosystems through modern, scalable software solutions and SaaS
-              products. Bridging the gap between education and technology.
+              products. We help educational institutions and growing businesses
+              modernize their operations with cutting-edge technology, reliable
+              infrastructure, and performance-driven design.
             </p>
+
+            <ul className="grid sm:grid-cols-2 gap-3 mb-8 max-w-2xl">
+              {features.map((f) => (
+                <li
+                  key={f}
+                  className="flex items-center gap-2 text-gray-300 text-sm"
+                >
+                  <span className="text-blue-400">&#10003;</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+
             <a
               href="https://dreamlytix.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:shadow-glow transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-6 py-3 text-xs rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white font-semibold hover:shadow-glow transition-all duration-300"
             >
               Visit Dreamlytix
               <FiExternalLink className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
