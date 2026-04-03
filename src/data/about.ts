@@ -1,6 +1,6 @@
 export const highlights = [
   { value: 7, suffix: "+", label: "Years Experience" },
-  { value: 15, suffix: "+", label: "Projects Shipped" },
+  { value: 10, suffix: "+", label: "Projects Shipped" },
   { value: 12, suffix: "+", label: "Technologies" },
 ];
 
