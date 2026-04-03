@@ -1,6 +1,4 @@
-"use client";
-
-import { useInView } from "@/hooks/useInView";
+import InViewSection from "./InViewSection";
 
 const experiences = [
   {
@@ -67,22 +65,17 @@ const experiences = [
 ];
 
 export default function Experience() {
-  const { ref, visible } = useInView();
-
   return (
-    <section
+    <InViewSection
       id="experience"
       className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 z-10"
-      ref={ref}
     >
       <div className="max-w-4xl mx-auto">
-        <h2
-          className={`font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up ${visible ? "visible" : ""}`}
-        >
+        <h2 className="font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up">
           {">"} Experience
         </h2>
         <p
-          className={`text-gray-500 text-sm sm:text-base text-center mb-10 sm:mb-14 max-w-lg mx-auto fade-up ${visible ? "visible" : ""}`}
+          className="text-gray-500 text-sm sm:text-base text-center mb-10 sm:mb-14 max-w-lg mx-auto fade-up"
           style={{ transitionDelay: "0.1s" }}
         >
           My professional journey so far
@@ -95,7 +88,7 @@ export default function Experience() {
             {experiences.map((exp, i) => (
               <div
                 key={exp.company}
-                className={`relative pl-8 md:pl-20 fade-left ${visible ? "visible" : ""}`}
+                className="relative pl-8 md:pl-20 fade-left"
                 style={{ transitionDelay: `${0.15 + i * 0.1}s` }}
               >
                 <div
@@ -155,6 +148,6 @@ export default function Experience() {
           </div>
         </div>
       </div>
-    </section>
+    </InViewSection>
   );
 }

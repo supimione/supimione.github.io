@@ -1,7 +1,5 @@
-"use client";
-
-import { useInView } from "@/hooks/useInView";
 import { FiExternalLink } from "react-icons/fi";
+import InViewSection from "./InViewSection";
 
 const features = [
   "Secure & modern websites",
@@ -11,24 +9,21 @@ const features = [
 ];
 
 export default function DreamlytixSpotlight() {
-  const { ref, visible } = useInView();
-
   return (
-    <section
+    <InViewSection
       id="dreamlytix"
       className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 z-10"
-      ref={ref}
     >
       <div className="max-w-5xl mx-auto">
         <div
-          className={`relative rounded-2xl p-6 sm:p-8 md:p-12 overflow-hidden gradient-border fade-up-lg ${visible ? "visible" : ""}`}
+          className="relative rounded-2xl p-6 sm:p-8 md:p-12 overflow-hidden gradient-border fade-up-lg"
           style={{ background: "rgba(6, 6, 17, 0.8)" }}
         >
           <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 pointer-events-none" />
 
           <div className="relative z-10">
             <span
-              className={`inline-block font-mono text-blue-400 text-xs uppercase tracking-widest mb-4 fade-left ${visible ? "visible" : ""}`}
+              className="inline-block font-mono text-blue-400 text-xs uppercase tracking-widest mb-4 fade-left"
               style={{ transitionDelay: "0.2s" }}
             >
               Currently Building
@@ -71,6 +66,6 @@ export default function DreamlytixSpotlight() {
           </div>
         </div>
       </div>
-    </section>
+    </InViewSection>
   );
 }

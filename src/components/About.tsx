@@ -2,52 +2,38 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import { highlights, aboutCards } from "@/data/about";
 
-function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
+function CountUp({ target, suffix = "", started }: { target: number; suffix?: string; started: boolean }) {
   const [count, setCount] = useState(0);
-  const started = useRef(false);
+  const hasRun = useRef(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          observer.disconnect();
-          let start = 0;
-          const step = Math.ceil(target / (1500 / 16));
-          const timer = setInterval(() => {
-            start += step;
-            if (start >= target) {
-              setCount(target);
-              clearInterval(timer);
-            } else {
-              setCount(start);
-            }
-          }, 16);
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target]);
+    if (!started || hasRun.current) return;
+    hasRun.current = true;
+
+    let current = 0;
+    const step = Math.ceil(target / (1500 / 16));
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(current);
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [started, target]);
 
   return (
-    <span ref={ref} className="text-gradient text-3xl font-extrabold">
+    <span className="text-gradient text-3xl font-extrabold">
       {count}
       {suffix}
     </span>
   );
 }
-
-const highlights = [
-  { value: 7, suffix: "+", label: "Years Experience" },
-  { value: 15, suffix: "+", label: "Projects Shipped" },
-  { value: 12, suffix: "+", label: "Technologies" },
-];
 
 export default function About() {
   const { ref, visible } = useInView();
@@ -99,7 +85,7 @@ export default function About() {
                   className={`text-center fade-up ${visible ? "visible" : ""}`}
                   style={{ transitionDelay: `${0.2 + i * 0.1}s` }}
                 >
-                  <CountUp target={h.value} suffix={h.suffix} />
+                  <CountUp target={h.value} suffix={h.suffix} started={visible} />
                   <p className="text-gray-500 text-xs mt-1 uppercase tracking-wider">
                     {h.label}
                   </p>
@@ -109,28 +95,7 @@ export default function About() {
           </div>
 
           <div className="flex flex-col gap-4">
-            {[
-              {
-                icon: "🏫",
-                title: "Founder @ Dreamlytix",
-                desc: "Building smart, scalable digital solutions for businesses — transforming with technology",
-              },
-              {
-                icon: "🤖",
-                title: "AI-Powered Development",
-                desc: "Claude Code, Codex & AI tools integrated into every stage — from ideation to deployment",
-              },
-              {
-                icon: "🔭",
-                title: "Currently Exploring",
-                desc: "AI-powered automation, cross-platform apps with React Native & AI-driven user experiences",
-              },
-              {
-                icon: "🌱",
-                title: "Mindset",
-                desc: "Continuous learning, building meaningful products & collaborating with people who value impact",
-              },
-            ].map((card, i) => (
+            {aboutCards.map((card, i) => (
               <div
                 key={card.title}
                 className={`glass glass-hover rounded-xl p-5 transition-all duration-300 group fade-right ${visible ? "visible" : ""}`}

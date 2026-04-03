@@ -13,7 +13,7 @@ export default function Footer() {
         <span className="text-xs text-gray-600">
           &copy; 2026 Supratim Das. All Rights Reserved.
         </span>
-        <ul className="flex gap-4 sm:gap-6">
+        <nav aria-label="Footer navigation"><ul className="flex gap-4 sm:gap-6">
           {links.map((l) => (
             <li key={l.label}>
               <a
@@ -24,7 +24,7 @@ export default function Footer() {
               </a>
             </li>
           ))}
-        </ul>
+        </ul></nav>
       </div>
     </footer>
   );

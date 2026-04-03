@@ -1,7 +1,5 @@
-"use client";
-
-import { useInView } from "@/hooks/useInView";
 import { FiArrowUpRight } from "react-icons/fi";
+import InViewSection from "./InViewSection";
 
 const projects = [
   {
@@ -31,22 +29,17 @@ const projects = [
 ];
 
 export default function Projects() {
-  const { ref, visible } = useInView();
-
   return (
-    <section
+    <InViewSection
       id="projects"
       className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 z-10"
-      ref={ref}
     >
       <div className="max-w-5xl mx-auto">
-        <h2
-          className={`font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up ${visible ? "visible" : ""}`}
-        >
+        <h2 className="font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up">
           {">"} Projects
         </h2>
         <p
-          className={`text-gray-500 text-sm sm:text-base text-center mb-8 sm:mb-12 max-w-lg mx-auto fade-up ${visible ? "visible" : ""}`}
+          className="text-gray-500 text-sm sm:text-base text-center mb-8 sm:mb-12 max-w-lg mx-auto fade-up"
           style={{ transitionDelay: "0.1s" }}
         >
           A selection of things I&apos;ve built
@@ -54,9 +47,12 @@ export default function Projects() {
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {projects.map((project, i) => (
-            <div
+            <a
               key={project.title}
-              className={`relative glass rounded-xl p-4 sm:p-6 group cursor-pointer transition-all duration-500 hover:shadow-glow-sm hover:-translate-y-2 overflow-hidden fade-up-lg ${visible ? "visible" : ""}`}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative glass rounded-xl p-4 sm:p-6 group cursor-pointer transition-all duration-500 hover:shadow-glow-sm hover:-translate-y-2 overflow-hidden fade-up-lg block"
               style={{ transitionDelay: `${0.15 + i * 0.15}s` }}
             >
               <div
@@ -71,7 +67,6 @@ export default function Projects() {
                   <FiArrowUpRight
                     className="text-gray-600 group-hover:text-blue-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
                     size={20}
-                    onClick={() => window.open(project.link, "_blank")}
                   />
                 </div>
                 <p className="text-gray-400 text-sm mb-5 leading-relaxed">
@@ -88,10 +83,10 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
-    </section>
+    </InViewSection>
   );
 }

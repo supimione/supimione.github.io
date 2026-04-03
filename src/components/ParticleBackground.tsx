@@ -59,11 +59,14 @@ export default function ParticleBackground() {
       alpha: Math.random() * 0.4 + 0.1,
     }));
 
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY + window.scrollY;
     };
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    if (!isTouch) {
+      window.addEventListener("mousemove", onMouseMove, { passive: true });
+    }
 
     const animate = () => {
       ctx.clearRect(0, 0, w, h);
@@ -133,16 +136,19 @@ export default function ParticleBackground() {
     };
     document.addEventListener("visibilitychange", onVisChange);
 
+    // Re-measure canvas when content loads (dynamic imports change page height)
     const resizeObserver = new ResizeObserver(() => {
       const newH = document.documentElement.scrollHeight;
-      if (Math.abs(newH - h) > 100) resize();
+      if (newH > h) resize();
     });
     resizeObserver.observe(document.body);
 
     return () => {
       cancelAnimationFrame(animFrame);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMouseMove);
+      if (!isTouch) {
+        window.removeEventListener("mousemove", onMouseMove);
+      }
       document.removeEventListener("visibilitychange", onVisChange);
       resizeObserver.disconnect();
     };

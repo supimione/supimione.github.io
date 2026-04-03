@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import ParticleBackground from "@/components/ParticleBackground";
-import CursorGlow from "@/components/CursorGlow";
 
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700", "800"],
 });
 
 const mono = JetBrains_Mono({
@@ -18,7 +17,10 @@ const mono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
+const SITE_URL = "https://www.supimione.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Supratim Das | Full-Stack Software Engineer & Founder of Dreamlytix",
   description:
     "Supratim Das — Full-Stack Software Engineer with 7+ years of experience in React, Next.js, Node.js & React Native. Founder of Dreamlytix, transforming schools into digital ecosystems. Open for consulting, collaborations & product development.",
@@ -37,12 +39,15 @@ export const metadata: Metadata = {
     "MongoDB",
     "NestJS",
   ],
-  authors: [{ name: "Supratim Das", url: "https://supimione.github.io" }],
+  authors: [{ name: "Supratim Das", url: "https://www.supimione.com" }],
   creator: "Supratim Das",
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://supimione.github.io",
+    url: SITE_URL,
     siteName: "Supratim Das",
     title: "Supratim Das | Full-Stack Engineer & Founder of Dreamlytix",
     description:
@@ -59,6 +64,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -68,14 +80,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${sans.variable} ${mono.variable}`}>
       <head>
-        <script
+        <Script
+          id="json-ld"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Supratim Das",
-              url: "https://supimione.github.io",
+              url: "https://www.supimione.com",
               jobTitle: "Full-Stack Software Engineer",
               worksFor: {
                 "@type": "Organization",
@@ -97,8 +111,6 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning className="bg-darkBg text-white overflow-x-hidden">
-        <ParticleBackground />
-        <CursorGlow />
         <Navbar />
         {children}
       </body>
