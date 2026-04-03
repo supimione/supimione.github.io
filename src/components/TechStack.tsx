@@ -19,7 +19,7 @@ export default function TechStack() {
     >
       <div className="max-w-5xl mx-auto">
         <h2
-          className={`font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up ${visible ? "visible" : ""}`}
+          className={`text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up ${visible ? "visible" : ""}`}
         >
           {">"} Tech Stack
         </h2>

@@ -23,7 +23,7 @@ export default function DreamlytixSpotlight() {
 
           <div className="relative z-10">
             <span
-              className="inline-block font-mono text-blue-400 text-xs uppercase tracking-widest mb-4 fade-left"
+              className="inline-block text-blue-400 text-xs uppercase tracking-widest mb-4 fade-left"
               style={{ transitionDelay: "0.2s" }}
             >
               Currently Building

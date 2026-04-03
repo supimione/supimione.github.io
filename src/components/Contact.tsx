@@ -32,7 +32,7 @@ export default function Contact() {
     >
       <div className="max-w-4xl mx-auto text-center">
         <h2
-          className={`font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 fade-up ${visible ? "visible" : ""}`}
+          className={`text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 fade-up ${visible ? "visible" : ""}`}
         >
           {">"} Let&apos;s Connect
         </h2>

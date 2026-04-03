@@ -71,7 +71,7 @@ export default function Experience() {
       className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 z-10"
     >
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up">
+        <h2 className="text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-4 text-center fade-up">
           {">"} Experience
         </h2>
         <p

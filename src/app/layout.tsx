@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const sans = Plus_Jakarta_Sans({
+const sans = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
-  weight: ["400", "600", "700", "800"],
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-mono",
+  weight: ["400", "500", "600", "700"],
 });
 
 const SITE_URL = "https://www.supimione.com";
@@ -78,7 +72,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`dark ${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`dark ${sans.variable}`}>
       <head>
         <Script
           id="json-ld"

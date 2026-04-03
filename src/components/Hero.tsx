@@ -35,7 +35,7 @@ export default function Hero() {
           <TypingAnimation
             text="> Hey, I'm Supratim Das"
             speed={60}
-            className="font-mono text-base md:text-lg text-accent"
+            className="text-base md:text-lg text-accent"
           />
         </div>
 

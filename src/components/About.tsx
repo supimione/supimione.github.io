@@ -46,7 +46,7 @@ export default function About() {
     >
       <div className="max-w-5xl mx-auto">
         <h2
-          className={`font-mono text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-8 sm:mb-12 text-center fade-up ${visible ? "visible" : ""}`}
+          className={`text-blue-400 text-xs sm:text-sm uppercase tracking-wider mb-8 sm:mb-12 text-center fade-up ${visible ? "visible" : ""}`}
         >
           {">"} About Me
         </h2>
