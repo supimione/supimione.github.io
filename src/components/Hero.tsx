@@ -19,7 +19,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8 flex justify-center"
         >
-          <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-blue-500/40 shadow-lg shadow-blue-500/20">
+          <div className="relative w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden ring-4 ring-blue-500/40 shadow-lg shadow-blue-500/20">
             <Image
               src={profileImg}
               alt="Supratim Das - Full-Stack Software Engineer"
@@ -43,7 +43,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 0.8, ease: "easeOut" }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold mb-6 leading-tight"
+          className="text-3xl sm:text-4xl md:text-4xl font-extrabold mb-6 leading-tight"
         >
           <span className="text-gradient">Full-Stack Engineer</span>
           <br />
@@ -98,12 +98,12 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.2, duration: 0.6 }}
-        className="absolute bottom-10"
+        className="absolute bottom-6"
       >
         <a href="#about">
           <FiChevronDown
             className="text-blue-400 animate-bounce-slow"
-            size={30}
+            size={28}
           />
         </a>
       </motion.div>
